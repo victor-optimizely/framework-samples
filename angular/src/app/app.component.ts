@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import  "../../../../header/webcomponent/opti-header/dist/src";
+import '../../node_modules/@optimizely/global-navigation/dist/src/global-navigation'
 
 @Component({
   selector: 'app-root',

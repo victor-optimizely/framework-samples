@@ -1,26 +1,43 @@
-import React from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { OptiHeader } from "../../../header/webcomponent/opti-header/dist/src";
+// todo: investigate importing to avoid accessing node_modules - potentically host on cdn and include as script src
+// import '@optimizely/global-navigation';
+import '../node_modules/@optimizely/global-navigation/dist/src/global-navigation';
 
 function App() {
+    const headerRef = useRef();
+
+
+    function eventListener(event: any) {
+        const value = event.detail;
+
+        if (value.toLowerCase() === 'rad') {
+            // @ts-ignore
+            headerRef.current.reportValue();
+        }
+    }
+
+    useEffect(() => {
+        if (!headerRef.current) {
+            console.log(" not in DOM")
+            return;
+        }
+        // @ts-ignore
+        headerRef.current.addEventListener('custom-input', eventListener);
+
+        return () => {
+            // @ts-ignore
+
+            headerRef.current.removeEventListener('custom-input', eventListener);
+        }
+    });
     return (
         <>
-            <head>
-                <script
-                    src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"
-                    defer
-                ></script>
 
-                <script type="module">
-                    WebComponents.waitFor((_) => {
-                        return import('node_modules/opti-header/dist/src');
-                    });
-                </script>
-                <title>Create React App with WebComponent Header</title>
-
-            </head>
-            <OptiHeader />
+            {/** @ts-ignore **/}
+            <global-navigation ref={headerRef}></global-navigation>
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
