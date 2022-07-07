@@ -37,7 +37,12 @@ function App() {
         <>
 
             {/** @ts-ignore **/}
-            <global-navigation ref={headerRef}></global-navigation>
+            <global-navigation ref={headerRef}>
+                {/* <div slot='right'>
+                    <img src="https://raw.githubusercontent.com/episerver/alpaca/c8add211890a61b88fd6033c16d34bcb09a46817/public/bit/static/images/peekaboo.jpeg?token=GHSAT0AAAAAABVED4VTTPCTWT3HGZ5XGDMQYWHKHHQ" alt="Alpaca" style={{maxWidth: "40px", marginRight: 10,  borderRadius: "50%"}}/>
+                </div> */}
+            {/** @ts-ignore **/}
+            </global-navigation>
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
